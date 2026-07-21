@@ -6,13 +6,27 @@ const FIELD_CLASS =
 export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | sent
 
-  function handleSubmit(e) {
+function handleSubmit(e) {
     e.preventDefault()
     setStatus('sending')
-    // TODO: replace with your Formspree endpoint (or any form backend), e.g.:
-    // fetch('https://formspree.io/f/yourFormId', { method: 'POST', body: new FormData(e.target), headers: { Accept: 'application/json' } })
-    setTimeout(() => setStatus('sent'), 600)
-  }
+    fetch('https://formspree.io/f/xqerlnpd', {
+      method: 'POST',
+      body: new FormData(e.target),
+      headers: { Accept: 'application/json' },
+    })
+      .then((res) => {
+        if (res.ok) {
+          setStatus('sent')
+        } else {
+          setStatus('idle')
+          alert('Something went wrong — please try again or email us directly.')
+        }
+      })
+      .catch(() => {
+        setStatus('idle')
+        alert('Something went wrong — please try again or email us directly.')
+      })
+}
 
   return (
     <section id="contact" className="py-20 md:py-28 border-t border-ink/10 bg-white/40">
