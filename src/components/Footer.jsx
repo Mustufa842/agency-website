@@ -28,7 +28,7 @@ export default function Footer() {
     <footer className="border-t border-ink/10 py-12">
       <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
         <p className="font-display font-bold text-lg">
-          Signal<span className="text-teal">.</span>
+         Tech Web Studio<span className="text-teal">.</span>
         </p>
 
         <ul className="flex items-center gap-5">
@@ -50,7 +50,7 @@ export default function Footer() {
           })}
         </ul>
 
-        <p className="text-xs text-ink/40">&copy; {new Date().getFullYear()} Signal. All rights reserved.</p>
+       <p className="text-xs text-ink/40">&copy; {new Date().getFullYear()} Tech Web Studio. All rights reserved.</p>
       </div>
     </footer>
   )
