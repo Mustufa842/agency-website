@@ -27,7 +27,7 @@ export default function Nav() {
     >
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#home" className="font-display font-bold text-lg tracking-tight focus-ring rounded">
-          Signal<span className="text-teal">.</span>
+          Tech Web Studio<span className="text-teal">.</span>
         </a>
 
         <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-ink/70">
