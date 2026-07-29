@@ -31,7 +31,7 @@ export default function Hero() {
       className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden min-h-screen flex items-center"
     >
       {/* 3D Background Elements */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div 
           className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-to-br from-teal/20 via-teal/10 to-transparent blur-3xl"
           animate={{ 
@@ -60,14 +60,19 @@ export default function Hero() {
           }}
         />
         <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-teal/5 via-coral/5 to-amber/5 blur-3xl rounded-full" />
+        
+        {/* Floating Geometric Shapes */}
+        <div className="absolute top-1/4 right-1/4 w-16 h-16 rounded-2xl bg-teal rotate-12 opacity-[0.05] animate-float-slow mix-blend-multiply" />
+        <div className="absolute bottom-1/4 left-1/4 w-20 h-20 rounded-full bg-coral rotate-45 opacity-[0.05] animate-float-slow mix-blend-multiply" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-1/3 w-12 h-12 rounded-xl bg-amber rotate-[30deg] opacity-[0.06] animate-float mix-blend-multiply" style={{ animationDelay: '2s' }} />
       </div>
 
       <motion.div 
-        className="max-w-6xl mx-auto px-6 relative"
+        className="max-w-6xl mx-auto px-6 relative will-change-transform"
         style={{ y, opacity }}
       >
         <motion.p 
-          className="font-mono text-xs uppercase tracking-widest text-teal-dark mb-5 inline-block px-4 py-2 rounded-full bg-teal/10 border border-teal/20 backdrop-blur-sm"
+          className="shimmer font-mono text-xs uppercase tracking-widest text-teal-dark mb-5 inline-block px-4 py-2 rounded-full bg-teal/10 border border-teal/20 backdrop-blur-sm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -76,7 +81,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.h1 
-          className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight max-w-3xl"
+          className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight max-w-3xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.06)]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -103,7 +108,7 @@ export default function Hero() {
         >
           <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-coral to-coral-dark text-white font-semibold px-8 py-4 rounded-full shadow-lg shadow-coral/30 hover:shadow-coral/40 transition-all duration-300 focus-ring"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-coral to-coral-dark text-white font-semibold px-8 py-4 rounded-full shadow-lg shadow-coral/30 hover:shadow-elevated hover:shadow-glow-coral transition-all duration-300 focus-ring"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -114,7 +119,7 @@ export default function Hero() {
           </motion.a>
           <motion.a
             href="#portfolio"
-            className="inline-flex items-center gap-2 border border-ink/20 bg-white/50 backdrop-blur-sm font-semibold px-8 py-4 rounded-full hover:border-ink/40 hover:bg-white/80 transition-all duration-300 focus-ring"
+            className="inline-flex items-center gap-2 border border-ink/20 bg-white/50 backdrop-blur-sm font-semibold px-8 py-4 rounded-full hover:border-ink/40 hover:bg-white/80 hover:shadow-elevated transition-all duration-300 focus-ring"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -141,8 +146,8 @@ export default function Hero() {
                 onClick={() => setActive(i)}
                 className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 focus-ring relative ${
                   active === i
-                    ? 'bg-ink text-paper border-ink shadow-lg shadow-ink/20'
-                    : 'border-ink/15 text-ink/60 hover:border-ink/30 hover:text-ink/80 bg-white/30 backdrop-blur-sm'
+                    ? 'bg-ink text-paper border-ink shadow-premium'
+                    : 'border-ink/15 text-ink/60 hover:border-ink/30 hover:text-ink/80 bg-white/30 backdrop-blur-sm hover:shadow-sm'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -159,30 +164,32 @@ export default function Hero() {
             ))}
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={v.key}
-              className="bg-white/80 backdrop-blur-xl border border-ink/10 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10 shadow-xl shadow-ink/5"
-              initial={{ opacity: 0, y: 20, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            >
-              <p className="text-ink/80 max-w-xl leading-relaxed">{v.pitch}</p>
-              <div className="md:ml-auto flex items-center gap-4 shrink-0">
-                <motion.span 
-                  className="font-display font-bold text-4xl bg-gradient-to-r from-teal to-coral bg-clip-text text-transparent"
-                  key={v.stat}
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  {v.stat}
-                </motion.span>
-                <span className="text-sm text-ink/50 max-w-[9rem] leading-tight">{v.statLabel}</span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <div className="perspective-container">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={v.key}
+                className="glass card-inner-light rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10 shadow-premium"
+                initial={{ opacity: 0, y: 20, scale: 0.98, rotateX: 10 }}
+                animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                exit={{ opacity: 0, y: -20, scale: 0.98, rotateX: -10 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+              >
+                <p className="text-ink/80 max-w-xl leading-relaxed">{v.pitch}</p>
+                <div className="md:ml-auto flex items-center gap-4 shrink-0">
+                  <motion.span 
+                    className="font-display font-bold text-4xl bg-gradient-to-r from-teal to-coral bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    key={v.stat}
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    {v.stat}
+                  </motion.span>
+                  <span className="text-sm text-ink/50 max-w-[9rem] leading-tight">{v.statLabel}</span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </motion.div>
       </motion.div>
     </section>

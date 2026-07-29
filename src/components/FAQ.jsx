@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 const FAQS = [
-  { q: 'How long does it take?', a: 'Most sites go live in 3\u20137 days, depending on the plan and how quickly we get your content and feedback.' },
-  { q: 'Do I need my own hosting?', a: 'No \u2014 we handle hosting for you. If you already have a domain, we can point it to your new site; if not, we\u2019ll help you get one.' },
-  { q: 'Can AI actually answer my customers?', a: 'Yes. The chatbot is trained on your business info \u2014 hours, services, pricing, FAQs \u2014 and can also collect leads or book appointments around the clock.' },
+  { q: 'How long does it take?', a: 'Most sites go live in 3–7 days, depending on the plan and how quickly we get your content and feedback.' },
+  { q: 'Do I need my own hosting?', a: 'No — we handle hosting for you. If you already have a domain, we can point it to your new site; if not, we’ll help you get one.' },
+  { q: 'Can AI actually answer my customers?', a: 'Yes. The chatbot is trained on your business info — hours, services, pricing, FAQs — and can also collect leads or book appointments around the clock.' },
   { q: 'What if I need changes after launch?', a: 'Small edits are included for the first 30 days. After that, we offer simple monthly maintenance or you can request one-off updates.' },
-  { q: 'Do you work with businesses outside these industries?', a: 'These are where we\u2019ve built the most experience, but we take on other local service businesses too \u2014 just reach out.' },
+  { q: 'Do you work with businesses outside these industries?', a: 'These are where we’ve built the most experience, but we take on other local service businesses too — just reach out.' },
 ]
 
 export default function FAQ() {
@@ -25,6 +25,8 @@ export default function FAQ() {
         <div className="absolute inset-0 bg-gradient-to-b from-white via-teal/[0.02] to-white" />
       </div>
 
+      <div className="section-divider absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
+
       <div className="max-w-3xl mx-auto px-6">
         <motion.div
           ref={ref}
@@ -32,7 +34,7 @@ export default function FAQ() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono text-xs uppercase tracking-widest text-teal-dark mb-4 inline-block px-3 py-1.5 rounded-full bg-teal/10 border border-teal/20">
+          <p className="shimmer font-mono text-xs uppercase tracking-widest text-teal-dark mb-4 inline-block px-3 py-1.5 rounded-full bg-teal/10 border border-teal/20 overflow-hidden relative">
             FAQ
           </p>
           <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-14 leading-[1.1]">
@@ -40,7 +42,7 @@ export default function FAQ() {
           </h2>
         </motion.div>
 
-        <div className="divide-y divide-ink/10 border-t border-b border-ink/10 bg-white/60 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg shadow-ink/5">
+        <div className="glass divide-y divide-ink/10 border-t border-b border-ink/10 rounded-2xl overflow-hidden shadow-lg shadow-ink/5">
           {FAQS.map((item, i) => {
             const open = openIndex === i
             return (
@@ -49,8 +51,14 @@ export default function FAQ() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="px-6"
+                className="px-6 relative hover:bg-teal/[0.02] transition-colors duration-300"
               >
+                {open && (
+                  <motion.div 
+                    layoutId="active-faq-border"
+                    className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-teal to-coral" 
+                  />
+                )}
                 <button
                   onClick={() => setOpenIndex(open ? -1 : i)}
                   aria-expanded={open}
@@ -61,7 +69,7 @@ export default function FAQ() {
                   </span>
                   <motion.div
                     animate={{ rotate: open ? 45 : 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 15 }}
                     className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-300 ${
                       open ? 'bg-teal/15 text-teal-dark' : 'bg-ink/5 text-ink/40 group-hover:bg-ink/10'
                     }`}
@@ -78,7 +86,14 @@ export default function FAQ() {
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-5 text-ink/65 leading-relaxed text-sm pr-8">{item.a}</p>
+                      <motion.p 
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                        className="pb-5 text-ink/65 leading-relaxed text-sm pr-8"
+                      >
+                        {item.a}
+                      </motion.p>
                     </motion.div>
                   )}
                 </AnimatePresence>

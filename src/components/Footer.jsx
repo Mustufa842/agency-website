@@ -27,11 +27,17 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-ink/10 py-12 bg-white/60 backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <p className="font-display font-bold text-xl">
-          Tech Web Studio<span className="text-teal">.</span>
-        </p>
+    <footer className="relative border-t border-ink/10 py-16 bg-white/40 backdrop-blur-xl overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-30 -z-10" />
+      <div className="section-divider absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
+      
+      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
+        <div className="group cursor-pointer">
+          <p className="font-display font-bold text-xl relative inline-block">
+            Tech Web Studio<span className="text-teal">.</span>
+            <span className="absolute -bottom-1 left-0 h-[2px] w-full origin-bottom-right scale-x-0 bg-gradient-to-r from-teal to-coral transition-transform duration-300 ease-out group-hover:origin-bottom-left group-hover:scale-x-100" />
+          </p>
+        </div>
 
         <ul className="flex items-center gap-4">
           {LINKS.map((l, i) => {
@@ -48,7 +54,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={l.label}
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-ink/15 text-ink/50 hover:text-ink hover:border-ink/30 bg-white/50 hover:bg-white transition-all duration-300 focus-ring group"
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-ink/15 text-ink/50 bg-white/50 focus-ring group transition-all duration-300 ease-premium hover:text-ink hover:border-transparent hover:shadow-premium hover:scale-110 hover:bg-gradient-to-br hover:from-teal/10 hover:to-coral/10"
                 >
                   <Icon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" strokeWidth={2} />
                 </a>
@@ -57,7 +63,7 @@ export default function Footer() {
           })}
         </ul>
 
-        <p className="text-xs text-ink/40">&copy; {new Date().getFullYear()} Tech Web Studio. All rights reserved.</p>
+        <p className="text-xs text-ink/40 tracking-wide">&copy; {new Date().getFullYear()} Tech Web Studio. All rights reserved.</p>
       </div>
     </footer>
   )

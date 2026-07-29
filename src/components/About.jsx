@@ -10,8 +10,14 @@ export default function About() {
 
   return (
     <section id="about" className="py-20 md:py-28 relative overflow-hidden">
+      <div className="section-divider mb-12 opacity-50" />
+      
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-teal/5 via-coral/5 to-amber/5 blur-3xl" />
+        
+        {/* Decorative Floating Elements */}
+        <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-gradient-to-tr from-teal to-transparent opacity-[0.03] animate-float-slow mix-blend-multiply" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 rounded-3xl rotate-12 bg-gradient-to-bl from-coral to-transparent opacity-[0.03] animate-float-slow mix-blend-multiply" style={{ animationDelay: '2s' }} />
       </div>
 
       <motion.div 
@@ -22,17 +28,18 @@ export default function About() {
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6 }}
+          className="shadow-premium rounded-2xl p-6 -m-6 bg-white/30 backdrop-blur-sm border border-white/20"
         >
-          <p className="font-mono text-xs uppercase tracking-widest text-teal-dark mb-4 inline-block px-3 py-1.5 rounded-full bg-teal/10 border border-teal/20">
+          <p className="shimmer font-mono text-xs uppercase tracking-widest text-teal-dark mb-4 inline-block px-3 py-1.5 rounded-full bg-teal/10 border border-teal/20">
             About
           </p>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight max-w-sm leading-[1.1]">
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight max-w-sm leading-[1.1] drop-shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
             One team, two jobs: <span className="bg-gradient-to-r from-teal to-coral bg-clip-text text-transparent">get you found</span>, then handle the busywork.
           </h2>
         </motion.div>
 
         <motion.div 
-          className="space-y-5 text-ink/70 leading-relaxed text-lg"
+          className="space-y-7 text-ink/70 leading-relaxed text-lg"
           initial={{ opacity: 0, x: 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -58,7 +65,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-gradient-to-b before:from-teal before:to-coral before:rounded-full"
+            className="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1.5 before:bg-gradient-to-b before:from-teal before:to-coral before:rounded-full before:animate-pulse-subtle"
           >
             No bloated agency overhead, no six-month timelines. Just a site and a system that
             work from week one.

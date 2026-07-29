@@ -1,9 +1,7 @@
-/* index.css - Updated with premium design tokens */
+/* index.css - Ultra-premium design system v2 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
 
 :root {
   --teal: #0E6E5E;
@@ -14,6 +12,7 @@
   --amber: #E8A83A;
   --ink: #1A1F1E;
   --paper: #F1F4F2;
+  --perspective: 1200px;
 }
 
 html {
@@ -43,20 +42,161 @@ body {
   @apply outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white;
 }
 
-/* Custom scrollbar */
+/* ============================
+   Premium Scrollbar
+   ============================ */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-paper;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-teal/30 rounded-full hover:bg-teal/50 transition-colors;
+  background: linear-gradient(180deg, var(--teal), var(--coral));
+  border-radius: 999px;
 }
 
-/* Smooth gradient animations */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--teal-dark), var(--coral-dark));
+}
+
+/* ============================
+   Glass morphism layers
+   ============================ */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 8px 32px -4px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.glass-dark {
+  background: rgba(16, 22, 28, 0.88);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px -4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ============================
+   3D Card System
+   ============================ */
+.perspective-container {
+  perspective: var(--perspective);
+  transform-style: preserve-3d;
+}
+
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.card-3d:hover {
+  box-shadow:
+    0 20px 60px -12px rgba(0, 0, 0, 0.15),
+    0 8px 24px -8px rgba(0, 0, 0, 0.08);
+}
+
+/* Inner light reflection for cards — premium multi-layer */
+.card-inner-light {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-inner-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 40%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.card-inner-light::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.02) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* ============================
+   Floating Effect — more dramatic
+   ============================ */
+.floating {
+  animation: floatEffect 6s ease-in-out infinite;
+}
+
+.floating-slow {
+  animation: floatEffect 8s ease-in-out infinite;
+}
+
+@keyframes floatEffect {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(0.5deg); }
+  50% { transform: translateY(-16px) rotate(0deg); }
+  75% { transform: translateY(-8px) rotate(-0.5deg); }
+}
+
+/* ============================
+   Shimmer Effect — more visible
+   ============================ */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.25) 55%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 250% 100%;
+  animation: shimmerSlide 4s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes shimmerSlide {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================
+   Gradient Animations
+   ============================ */
 .gradient-shift {
   background-size: 200% 200%;
   animation: gradientShift 8s ease-in-out infinite;
@@ -67,21 +207,90 @@ body {
   50% { background-position: 100% 50%; }
 }
 
-/* Glass morphism base */
-.glass {
-  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
+/* Rotating gradient border */
+.gradient-border {
+  position: relative;
 }
 
-.glass-dark {
-  @apply bg-ink/80 backdrop-blur-xl border border-ink/20 shadow-xl;
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    var(--teal),
+    var(--coral),
+    var(--amber),
+    var(--teal-light),
+    var(--teal)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateGradient 4s linear infinite;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
-/* Premium card hover */
-.card-hover {
-  @apply transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl;
+@keyframes rotateGradient {
+  to { --angle: 360deg; }
 }
 
-/* Text gradients */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ============================
+   Grain/Noise Texture Overlay
+   ============================ */
+.noise-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -2%); }
+  20% { transform: translate(2%, 2%); }
+  30% { transform: translate(-1%, 1%); }
+  40% { transform: translate(1%, -1%); }
+  50% { transform: translate(-2%, 2%); }
+}
+
+/* ============================
+   Cursor Glow Follower — bigger & more colorful
+   ============================ */
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,110,94,0.06) 0%, rgba(232,106,90,0.03) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  will-change: left, top;
+  filter: blur(10px);
+}
+
+/* ============================
+   Text Gradients
+   ============================ */
 .text-gradient-teal {
   @apply bg-gradient-to-r from-teal to-teal-dark bg-clip-text text-transparent;
 }
@@ -91,5 +300,190 @@ body {
 }
 
 .text-gradient-amber {
-  @apply bg-gradient-to-r from-amber to-amber-dark bg-clip-text text-transparent;
+  background: linear-gradient(to right, #FFC145, #E8A83A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================
+   Premium Card Hover
+   ============================ */
+.card-hover {
+  @apply transition-all duration-500 hover:-translate-y-1;
+}
+
+/* ============================
+   Section Divider — animated
+   ============================ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(14,110,94,0.25) 30%, rgba(255,90,54,0.2) 50%, rgba(232,168,58,0.15) 70%, transparent 100%);
+  margin: 0 auto;
+  max-width: 700px;
+  animation: dividerGlow 4s ease-in-out infinite;
+}
+
+@keyframes dividerGlow {
+  0%, 100% { opacity: 0.5; max-width: 600px; }
+  50% { opacity: 1; max-width: 700px; }
+}
+
+/* ============================
+   Scroll Progress Bar — thicker
+   ============================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--coral), var(--amber), var(--teal));
+  background-size: 300% 100%;
+  animation: progressGradient 3s ease-in-out infinite;
+  z-index: 9998;
+  transform-origin: left;
+  will-change: transform;
+  box-shadow: 0 0 12px rgba(14, 110, 94, 0.4);
+}
+
+@keyframes progressGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================
+   Magnetic Button Helper
+   ============================ */
+.magnetic-wrap {
+  display: inline-flex;
+  position: relative;
+}
+
+/* ============================
+   Premium Input Focus — stronger glow
+   ============================ */
+.input-premium {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-premium:focus {
+  box-shadow:
+    0 0 0 4px rgba(14, 110, 94, 0.12),
+    0 4px 20px -4px rgba(14, 110, 94, 0.12);
+  transform: translateY(-1px);
+}
+
+/* ============================
+   Pulsing Glow Ring
+   ============================ */
+.glow-ring {
+  position: relative;
+}
+
+.glow-ring::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: transparent;
+  box-shadow: 0 0 20px -4px currentColor;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.glow-ring:hover::after {
+  opacity: 0.4;
+}
+
+/* ============================
+   Live Status Pulse — more visible
+   ============================ */
+.status-live {
+  position: relative;
+  padding-left: 14px;
+}
+
+.status-live::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: statusPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(14, 110, 94, 0.5);
+}
+
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 110, 94, 0.5), 0 0 8px rgba(14, 110, 94, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(14, 110, 94, 0), 0 0 16px rgba(14, 110, 94, 0.3); }
+}
+
+/* ============================
+   Hover Spotlight Effect
+   ============================ */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(14,110,94,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ============================
+   Animated gradient text — for headings
+   ============================ */
+.animated-gradient-text {
+  background: linear-gradient(135deg, var(--teal), var(--coral), var(--amber), var(--teal));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: animatedGradient 6s ease-in-out infinite;
+}
+
+@keyframes animatedGradient {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 50% 0%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 100%; }
+}
+
+/* ============================
+   3D Floating Badge
+   ============================ */
+.badge-3d {
+  transform: perspective(600px) rotateX(2deg);
+  transition: transform 0.3s ease;
+}
+
+.badge-3d:hover {
+  transform: perspective(600px) rotateX(-2deg) translateY(-2px);
+}
+
+/* ============================
+   Parallax Layer Offsets
+   ============================ */
+.parallax-slow {
+  will-change: transform;
 }
