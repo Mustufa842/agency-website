@@ -1,4 +1,6 @@
+// components/Footer.jsx
 import { Mail, MessageCircle } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 function LinkedinIcon(props) {
   return (
@@ -25,32 +27,37 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-ink/10 py-12">
+    <footer className="border-t border-ink/10 py-12 bg-white/60 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <p className="font-display font-bold text-lg">
-         Tech Web Studio<span className="text-teal">.</span>
+        <p className="font-display font-bold text-xl">
+          Tech Web Studio<span className="text-teal">.</span>
         </p>
 
-        <ul className="flex items-center gap-5">
-          {LINKS.map((l) => {
+        <ul className="flex items-center gap-4">
+          {LINKS.map((l, i) => {
             const Icon = l.icon
             return (
-              <li key={l.label}>
+              <motion.li 
+                key={l.label}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+              >
                 <a
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={l.label}
-                  className="w-9 h-9 flex items-center justify-center rounded-full border border-ink/15 text-ink/60 hover:text-ink hover:border-ink/30 transition-colors focus-ring"
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-ink/15 text-ink/50 hover:text-ink hover:border-ink/30 bg-white/50 hover:bg-white transition-all duration-300 focus-ring group"
                 >
-                  <Icon className="w-4 h-4" strokeWidth={2} />
+                  <Icon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" strokeWidth={2} />
                 </a>
-              </li>
+              </motion.li>
             )
           })}
         </ul>
 
-       <p className="text-xs text-ink/40">&copy; {new Date().getFullYear()} Tech Web Studio. All rights reserved.</p>
+        <p className="text-xs text-ink/40">&copy; {new Date().getFullYear()} Tech Web Studio. All rights reserved.</p>
       </div>
     </footer>
   )

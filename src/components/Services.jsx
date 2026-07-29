@@ -1,4 +1,7 @@
+// components/Services.jsx
 import { Globe, MessageCircle, Workflow, Check } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 
 const SERVICES = [
   {
@@ -25,34 +28,61 @@ const SERVICES = [
 ]
 
 const ACCENTS = {
-  teal: { bg: 'bg-teal/10', text: 'text-teal-dark', ring: 'group-hover:border-teal/40' },
-  coral: { bg: 'bg-coral/10', text: 'text-coral-dark', ring: 'group-hover:border-coral/40' },
-  amber: { bg: 'bg-amber/20', text: 'text-ink', ring: 'group-hover:border-amber/60' },
+  teal: { bg: 'bg-teal/15', text: 'text-teal-dark', ring: 'hover:border-teal/40', gradient: 'from-teal to-teal-dark' },
+  coral: { bg: 'bg-coral/15', text: 'text-coral-dark', ring: 'hover:border-coral/40', gradient: 'from-coral to-coral-dark' },
+  amber: { bg: 'bg-amber/20', text: 'text-ink', ring: 'hover:border-amber/60', gradient: 'from-amber to-amber-dark' },
 }
 
 export default function Services() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  })
+
   return (
-    <section id="services" className="py-20 md:py-28 border-t border-ink/10 bg-white/40">
+    <section id="services" className="py-20 md:py-28 relative overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-teal/5 via-transparent to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-coral/5 via-transparent to-transparent blur-3xl" />
+      </div>
+
       <div className="max-w-6xl mx-auto px-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-teal-dark mb-4">Services</p>
-        <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tight max-w-xl mb-14">
-          Everything you need to get found and stay responsive.
-        </h2>
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="font-mono text-xs uppercase tracking-widest text-teal-dark mb-4 inline-block px-3 py-1.5 rounded-full bg-teal/10 border border-teal/20">
+            Services
+          </p>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight max-w-xl leading-[1.1] mb-14">
+            Everything you need to <span className="bg-gradient-to-r from-teal to-coral bg-clip-text text-transparent">get found</span> and stay responsive.
+          </h2>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {SERVICES.map((s) => {
+          {SERVICES.map((s, index) => {
             const Icon = s.icon
             const a = ACCENTS[s.accent]
             return (
-              <div
+              <motion.div
                 key={s.title}
-                className={`group bg-paper border border-ink/10 rounded-2xl p-7 transition-colors ${a.ring}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ 
+                  y: -8,
+                  transition: { type: 'spring', stiffness: 300, damping: 20 }
+                }}
+                className={`group bg-white/80 backdrop-blur-xl border border-ink/10 rounded-2xl p-8 transition-all duration-300 shadow-lg shadow-ink/5 hover:shadow-xl hover:shadow-ink/10 ${a.ring} relative overflow-hidden`}
               >
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 ${a.bg}`}>
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${a.gradient} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity duration-500`} />
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${a.bg} relative`}>
                   <Icon className={`w-5 h-5 ${a.text}`} strokeWidth={2} />
                 </div>
                 <h3 className="font-display font-semibold text-xl mb-2">{s.title}</h3>
-                <p className="text-ink/60 text-sm mb-5 leading-relaxed">{s.desc}</p>
+                <p className="text-ink/60 text-sm mb-6 leading-relaxed">{s.desc}</p>
                 <ul className="space-y-2.5">
                   {s.items.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-ink/75">
@@ -61,7 +91,7 @@ export default function Services() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             )
           })}
         </div>

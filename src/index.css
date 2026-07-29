@@ -1,6 +1,20 @@
+/* index.css - Updated with premium design tokens */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
+
+:root {
+  --teal: #0E6E5E;
+  --teal-dark: #0A5246;
+  --teal-light: #1A8A78;
+  --coral: #E86A5A;
+  --coral-dark: #D45545;
+  --amber: #E8A83A;
+  --ink: #1A1F1E;
+  --paper: #F1F4F2;
+}
 
 html {
   scroll-behavior: smooth;
@@ -8,6 +22,7 @@ html {
 
 body {
   @apply bg-paper text-ink font-body antialiased;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 ::selection {
@@ -25,5 +40,56 @@ body {
 }
 
 .focus-ring {
-  @apply outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-paper;
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-paper;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-teal/30 rounded-full hover:bg-teal/50 transition-colors;
+}
+
+/* Smooth gradient animations */
+.gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Glass morphism base */
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
+}
+
+.glass-dark {
+  @apply bg-ink/80 backdrop-blur-xl border border-ink/20 shadow-xl;
+}
+
+/* Premium card hover */
+.card-hover {
+  @apply transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl;
+}
+
+/* Text gradients */
+.text-gradient-teal {
+  @apply bg-gradient-to-r from-teal to-teal-dark bg-clip-text text-transparent;
+}
+
+.text-gradient-coral {
+  @apply bg-gradient-to-r from-coral to-coral-dark bg-clip-text text-transparent;
+}
+
+.text-gradient-amber {
+  @apply bg-gradient-to-r from-amber to-amber-dark bg-clip-text text-transparent;
 }
