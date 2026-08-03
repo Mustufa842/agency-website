@@ -89,11 +89,11 @@ export default function Contact() {
             >
               <div className="sm:col-span-1">
                 <label htmlFor="name" className="block text-xs font-semibold text-ink/60 mb-1.5">Name</label>
-                <input id="name" name="name" type="text" required className={FIELD_CLASS} placeholder="Jane Doe" />
+                <input id="name" name="name" type="text" required className={FIELD_CLASS} placeholder="Tech Web Studio" />
               </div>
               <div className="sm:col-span-1">
                 <label htmlFor="business" className="block text-xs font-semibold text-ink/60 mb-1.5">Business</label>
-                <input id="business" name="business" type="text" required className={FIELD_CLASS} placeholder="Jane's Diner" />
+                <input id="business" name="business" type="text" required className={FIELD_CLASS} placeholder="Tech Web Studio" />
               </div>
               <div className="sm:col-span-1">
                 <label htmlFor="phone" className="block text-xs font-semibold text-ink/60 mb-1.5">Phone</label>
