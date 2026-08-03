@@ -97,11 +97,11 @@ export default function Contact() {
               </div>
               <div className="sm:col-span-1">
                 <label htmlFor="phone" className="block text-xs font-semibold text-ink/60 mb-1.5">Phone</label>
-                <input id="phone" name="phone" type="tel" className={FIELD_CLASS} placeholder="+92 300 1234567" />
+                <input id="phone" name="phone" type="tel" className={FIELD_CLASS} placeholder="+92 330 2753975" />
               </div>
               <div className="sm:col-span-1">
                 <label htmlFor="email" className="block text-xs font-semibold text-ink/60 mb-1.5">Email</label>
-                <input id="email" name="email" type="email" required className={FIELD_CLASS} placeholder="jane@example.com" />
+                <input id="email" name="email" type="email" required className={FIELD_CLASS} placeholder="mustufaaijaz1234@gmail.com" />
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="message" className="block text-xs font-semibold text-ink/60 mb-1.5">Message</label>
