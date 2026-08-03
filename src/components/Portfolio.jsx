@@ -92,6 +92,20 @@ function ProjectCard({ p, index, inView }) {
     </motion.div>
   )
 
+  if (p.ready && p.link) {
+    return (
+      <a
+        href={p.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block h-full cursor-pointer"
+        aria-label={`Open ${p.title} project`}
+      >
+        <div className="perspective-container h-full">{cardContent}</div>
+      </a>
+    )
+  }
+
   if (p.ready) {
     return <div className="perspective-container h-full">{cardContent}</div>
   }
