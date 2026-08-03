@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import { useRef } from 'react'
 
 const PROJECTS = [
-  { title: 'Restaurant Website', tag: 'Live', desc: 'Full menu, online ordering and reservations for a local restaurant.', ready: true },
+  { title: 'Restaurant Website', tag: 'Live', desc: 'Full menu, online ordering and reservations for a local restaurant.', ready: true, link: 'https://ember-and-bloom-cafe-4qdua24xa-mustufa842s-projects.vercel.app/' },
   { title: 'Gym Website', tag: 'Coming Soon', ready: false },
   { title: 'Dental Clinic', tag: 'Coming Soon', ready: false },
   { title: 'Law Firm', tag: 'Coming Soon', ready: false },
