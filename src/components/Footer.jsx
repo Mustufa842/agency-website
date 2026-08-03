@@ -19,10 +19,10 @@ function GithubIcon(props) {
 }
 
 const LINKS = [
-  { icon: Mail, label: 'Email', href: 'mailto:hello@youragency.com' },
+  { icon: Mail, label: 'Email', href: 'mailto:mustufaaijaz1234@gmail.com' },
   { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://linkedin.com/in/yourprofile' },
-  { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/yourusername' },
-  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/00000000000' },
+  { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/Mustufa842' },
+  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/03302753975' },
 ]
 
 export default function Footer() {
