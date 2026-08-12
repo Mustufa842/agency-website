@@ -19,8 +19,8 @@ function GithubIcon(props) {
 }
 
 const LINKS = [
-  { icon: Mail, label: 'Email', href: 'mailto:mustufaaijaz1234@gmail.com' },
-  { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://linkedin.com/in/yourprofile' },
+  { icon: Mail, label: 'Email', href: 'mailto:techlearn.908@gmail.com' },
+  { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/mustufa-aijaz-03b672351/' },
   { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/Mustufa842' },
   { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/03302753975' },
 ]
