@@ -1,7 +1,7 @@
 // components/Portfolio.jsx
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 const PROJECTS = [
   { title: 'Restaurant Website', tag: 'Live', desc: 'Full menu, online ordering and reservations for a local restaurant.', ready: true, link: 'https://ember-and-bloom-cafe-4qdua24xa-mustufa842s-projects.vercel.app/' },
@@ -10,6 +10,70 @@ const PROJECTS = [
   { title: 'Dental Clinic', tag: 'Coming Soon', ready: false },
   { title: 'Law Firm', tag: 'Coming Soon', ready: false },
 ]
+
+// Free screenshot service — generates a live thumbnail of the given URL.
+// Swap this helper if you'd rather use a different provider (e.g. Microlink, urlbox, your own puppeteer endpoint).
+function getScreenshotUrl(pageUrl, width = 900) {
+  return `https://image.thum.io/get/width/${width}/crop/675/noanimate/${pageUrl}`
+}
+
+function BrowserTabPreview({ url, title }) {
+  const [loaded, setLoaded] = useState(false)
+  const [errored, setErrored] = useState(false)
+
+  return (
+    <div className="w-full h-full flex flex-col">
+      {/* fake browser chrome */}
+      <div className="flex items-center gap-2 px-3 py-2 bg-ink/[0.04] border-b border-ink/10">
+        <div className="flex gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-400/70" />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+        </div>
+        <div className="flex-1 ml-2 px-2.5 py-1 rounded-md bg-white/70 border border-ink/10 truncate">
+          <span className="font-mono text-[10px] text-ink/40 truncate">
+            {url.replace(/^https?:\/\//, '')}
+          </span>
+        </div>
+      </div>
+
+      {/* screenshot area */}
+      <div className="relative flex-1 overflow-hidden bg-white">
+        {!loaded && !errored && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal/[0.08] to-amber/[0.06] shimmer">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-ink/30 animate-pulse-subtle">
+              Loading preview…
+            </span>
+          </div>
+        )}
+
+        {!errored && (
+          <img
+            src={getScreenshotUrl(url)}
+            alt={`Live preview of ${title}`}
+            loading="lazy"
+            onLoad={() => setLoaded(true)}
+            onError={() => setErrored(true)}
+            className={`w-full h-full object-cover object-top transition-opacity duration-500 ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        )}
+
+        {errored && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal/5 to-transparent">
+            <span className="font-display font-bold text-2xl text-teal-dark/70">
+              {title}
+            </span>
+          </div>
+        )}
+
+        {/* subtle gradient overlay so text/badges above stay readable if placed on top */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/10 to-transparent" />
+      </div>
+    </div>
+  )
+}
 
 function ProjectCard({ p, index, inView }) {
   const cardRef = useRef(null)
@@ -58,20 +122,15 @@ function ProjectCard({ p, index, inView }) {
       }`}
     >
       <div className={`aspect-[4/3] flex items-center justify-center relative ${
-        p.ready ? 'bg-gradient-to-br from-teal/[0.08] to-amber/[0.06] shimmer' : 'bg-ink/[0.02]'
+        p.ready ? '' : 'bg-ink/[0.02]'
       }`}>
         {!p.ready && (
           <span className="font-mono text-[11px] uppercase tracking-widest text-ink/30 animate-pulse-subtle">
             Preview coming soon
           </span>
         )}
-        {p.ready && (
-          <div className="relative w-full h-full flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent" />
-            <span className="font-display font-bold text-2xl text-teal-dark/70 relative z-10">
-              {p.title}
-            </span>
-          </div>
+        {p.ready && p.link && (
+          <BrowserTabPreview url={p.link} title={p.title} />
         )}
       </div>
       <div className="p-5">
