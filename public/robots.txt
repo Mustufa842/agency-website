@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://agency-website.mustufaaijaz1234.workers.dev/sitemap.xml
