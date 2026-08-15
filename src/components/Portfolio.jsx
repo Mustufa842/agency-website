@@ -2,22 +2,32 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useRef, useState } from 'react'
+import restaurantPreview from './preview/restaurant.png'
+import salonPreview from './preview/salon.png'
 
 const PROJECTS = [
-  { title: 'Restaurant Website', tag: 'Live', desc: 'Full menu, online ordering and reservations for a local restaurant.', ready: true, link: 'https://ember-and-bloom-cafe-4qdua24xa-mustufa842s-projects.vercel.app/' },
-  { title: 'Salon', tag: 'Live', ready: true, desc: 'Full-stack booking platform for a luxury salon — ASP.NET Core + SQL Server backend, live admin dashboard, and a public site with real-time booking and email confirmations, deployed free on Azure and Cloudflare.', link: 'https://maison-elegance-frontend.mustufaaijaz1234.workers.dev/' },
+  {
+    title: 'Restaurant Website',
+    tag: 'Live',
+    desc: 'Full menu, online ordering and reservations for a local restaurant.',
+    ready: true,
+    link: 'https://ember-and-bloom-cafe-4qdua24xa-mustufa842s-projects.vercel.app/',
+    screenshot: restaurantPreview,
+  },
+  {
+    title: 'Salon',
+    tag: 'Live',
+    ready: true,
+    desc: 'Full-stack booking platform for a luxury salon — ASP.NET Core + SQL Server backend, live admin dashboard, and a public site with real-time booking and email confirmations, deployed free on Azure and Cloudflare.',
+    link: 'https://maison-elegance-frontend.mustufaaijaz1234.workers.dev/',
+    screenshot: salonPreview,
+  },
   { title: 'Gym Website', tag: 'Coming Soon', ready: false },
   { title: 'Dental Clinic', tag: 'Coming Soon', ready: false },
   { title: 'Law Firm', tag: 'Coming Soon', ready: false },
 ]
 
-// Free screenshot service — generates a live thumbnail of the given URL.
-// Swap this helper if you'd rather use a different provider (e.g. Microlink, urlbox, your own puppeteer endpoint).
-function getScreenshotUrl(pageUrl, width = 900) {
-  return `https://image.thum.io/get/width/${width}/crop/675/noanimate/${pageUrl}`
-}
-
-function BrowserTabPreview({ url, title }) {
+function BrowserTabPreview({ url, title, screenshot }) {
   const [loaded, setLoaded] = useState(false)
   const [errored, setErrored] = useState(false)
 
@@ -39,7 +49,7 @@ function BrowserTabPreview({ url, title }) {
 
       {/* screenshot area */}
       <div className="relative flex-1 overflow-hidden bg-white">
-        {!loaded && !errored && (
+        {!loaded && !errored && screenshot && (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal/[0.08] to-amber/[0.06] shimmer">
             <span className="font-mono text-[10px] uppercase tracking-widest text-ink/30 animate-pulse-subtle">
               Loading preview…
@@ -47,10 +57,10 @@ function BrowserTabPreview({ url, title }) {
           </div>
         )}
 
-        {!errored && (
+        {screenshot && !errored && (
           <img
-            src={getScreenshotUrl(url)}
-            alt={`Live preview of ${title}`}
+            src={screenshot}
+            alt={`Preview of ${title}`}
             loading="lazy"
             onLoad={() => setLoaded(true)}
             onError={() => setErrored(true)}
@@ -60,7 +70,7 @@ function BrowserTabPreview({ url, title }) {
           />
         )}
 
-        {errored && (
+        {(!screenshot || errored) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal/5 to-transparent">
             <span className="font-display font-bold text-2xl text-teal-dark/70">
               {title}
@@ -130,7 +140,7 @@ function ProjectCard({ p, index, inView }) {
           </span>
         )}
         {p.ready && p.link && (
-          <BrowserTabPreview url={p.link} title={p.title} />
+          <BrowserTabPreview url={p.link} title={p.title} screenshot={p.screenshot} />
         )}
       </div>
       <div className="p-5">
