@@ -5,10 +5,10 @@ import { useRef } from 'react'
 
 const PROJECTS = [
   { title: 'Restaurant Website', tag: 'Live', desc: 'Full menu, online ordering and reservations for a local restaurant.', ready: true, link: 'https://ember-and-bloom-cafe-4qdua24xa-mustufa842s-projects.vercel.app/' },
+  { title: 'Salon', tag: 'Live', ready: true, desc: 'Full-stack booking platform for a luxury salon — ASP.NET Core + SQL Server backend, live admin dashboard, and a public site with real-time booking and email confirmations, deployed free on Azure and Cloudflare.', link: 'https://maison-elegance-frontend.mustufaaijaz1234.workers.dev/' },
   { title: 'Gym Website', tag: 'Coming Soon', ready: false },
   { title: 'Dental Clinic', tag: 'Coming Soon', ready: false },
   { title: 'Law Firm', tag: 'Coming Soon', ready: false },
-  { title: 'Salon', tag: 'Coming Soon', ready: false },
 ]
 
 function ProjectCard({ p, index, inView }) {
