@@ -1,68 +1,32 @@
-# Agency Website
+# TechLearning Web Studio — Agency Website
 
-A React + Vite + Tailwind CSS website for a web dev / AI automation agency serving
-restaurants, dentists, gyms, salons, clinics, law firms and real estate businesses.
+The public-facing website for my web development and AI automation agency, targeting small businesses like restaurants, dental clinics, gyms, salons, and law firms.
 
-Built with the free stack: React, Vite, Tailwind CSS, deployed on Cloudflare Pages
-from GitHub. Hosting cost: $0.
+**Live site:** https://agency-website.mustufaaijaz1234.workers.dev/
 
-## Before you launch — rename and personalize
+## What it does
 
-The site ships with placeholder details you should replace:
+- Presents services (web development, AI chatbots, automation), pricing, and a portfolio of client work
+- Built and deployed solo, end-to-end, on a zero-cost infrastructure stack
 
-- **Brand name** — currently "Signal". Find/replace it in `src/components/Nav.jsx`
-  and `src/components/Footer.jsx`.
-- **Contact links** — `src/components/Footer.jsx` has placeholder email, LinkedIn,
-  GitHub and WhatsApp links. Update the `LINKS` array.
-- **Contact form backend** — `src/components/Contact.jsx` currently fakes a
-  successful submission. Wire it to a real backend, e.g. [Formspree](https://formspree.io)
-  (free tier): create a form, grab your endpoint, and uncomment/replace the `fetch`
-  call in `handleSubmit`.
-- **Portfolio** — `src/components/Portfolio.jsx` has one "live" restaurant project
-  and four "Coming Soon" cards. Swap in real screenshots/links as you finish more.
-- **Pricing, copy, FAQ** — adjust numbers and wording in `src/components/Pricing.jsx`
-  and `src/components/FAQ.jsx` to match your actual offer.
+## Pages
 
-## Run locally
+- Home (hero, services, portfolio, pricing, FAQ)
+- About
+- Services
+- Portfolio
+- Pricing
+- Contact
 
-```bash
-npm install
-npm run dev
-```
+## Tech Stack
 
-Opens at `http://localhost:5173`.
+- React + Vite
+- Tailwind CSS
+- Deployed via Cloudflare Pages/Workers, connected to this GitHub repo for CI deploys
 
-## Deploy: GitHub → Cloudflare Pages
+## Status
 
-1. **Push to GitHub**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/agency-website.git
-   git push -u origin main
-   ```
+Live and actively updated as new client work is completed.
 
-2. **Connect Cloudflare Pages**
-   - Go to the Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** →
-     **Connect to Git**.
-   - Select this repository.
-   - Build settings:
-     - **Framework preset:** Vite
-     - **Build command:** `npm run build`
-     - **Build output directory:** `dist`
-   - Click **Save and Deploy**.
-
-3. **Live URL**
-   Cloudflare gives you a free `youragency.pages.dev` URL immediately. Every push
-   to `main` redeploys automatically. When you're ready, buy a domain and attach
-   it in the Pages project's **Custom domains** tab.
-
-## Tech stack
-
-- React 19 + Vite
-- Tailwind CSS 3
-- [lucide-react](https://lucide.dev) for icons
-- No backend required — the contact form needs a form service (see above) to
-  actually deliver messages
+---
+*Built by [Mustufa Aijaz](https://github.com/Mustufa842) — [TechLearning Web Studio](#)*
