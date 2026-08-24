@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import { useRef, useState } from 'react'
 import restaurantPreview from './preview/restaurant.png'
 import salonPreview from './preview/salon.png'
-import DentalPreview from "./preview/dental.png";
+import dentalPreview from "./preview/dental.png";
 
 const PROJECTS = [
   {
