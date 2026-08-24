@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import { useRef, useState } from 'react'
 import restaurantPreview from './preview/restaurant.png'
 import salonPreview from './preview/salon.png'
+import salonPreview from './preview/dental.png'
 
 const PROJECTS = [
   {
@@ -25,6 +26,7 @@ const PROJECTS = [
   { title: 'Dental Clinic', tag: 'Live', ready: true, desc: 'Modern dental clinic website with online appointment booking and patient portal.', link: 'https://aurelia-dental.mustufaaijaz1234.workers.dev/', screenshot: DentalPreview },
   { title: 'Gym Website', tag: 'Coming Soon', ready: false },
   { title: 'Law Firm', tag: 'Coming Soon', ready: false },
+]
 
 
 function BrowserTabPreview({ url, title, screenshot }) {
