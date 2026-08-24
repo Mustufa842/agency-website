@@ -22,10 +22,10 @@ const PROJECTS = [
     link: 'https://maison-elegance-frontend.mustufaaijaz1234.workers.dev/',
     screenshot: salonPreview,
   },
+  { title: 'Dental Clinic', tag: 'Live', ready: true, desc: 'Modern dental clinic website with online appointment booking and patient portal.', link: 'https://aurelia-dental.mustufaaijaz1234.workers.dev/', screenshot: DentalPreview },
   { title: 'Gym Website', tag: 'Coming Soon', ready: false },
-  { title: 'Dental Clinic', tag: 'Coming Soon', ready: false },
   { title: 'Law Firm', tag: 'Coming Soon', ready: false },
-]
+
 
 function BrowserTabPreview({ url, title, screenshot }) {
   const [loaded, setLoaded] = useState(false)
