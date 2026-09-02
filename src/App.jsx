@@ -1,4 +1,5 @@
-// App.jsx
+// src/App.jsx
+
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -8,7 +9,9 @@ import Pricing from './components/Pricing'
 import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import { useEffect, useState, useRef } from 'react'
+import SEOPage from './pages/SEOPage'
+import { SERVICE_PAGES } from './pages/ServicePages'
+import { useEffect, useRef } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 
 function CursorGlow() {
@@ -17,21 +20,28 @@ function CursorGlow() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const isTouchDevice = 'ontouchstart' in window
+
+    const isTouchDevice =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0
+
     if (isTouchDevice) {
       el.style.display = 'none'
       return
     }
 
     let rafId
+
     const onMove = (e) => {
       cancelAnimationFrame(rafId)
+
       rafId = requestAnimationFrame(() => {
-        el.style.left = e.clientX + 'px'
-        el.style.top = e.clientY + 'px'
+        el.style.left = `${e.clientX}px`
+        el.style.top = `${e.clientY}px`
       })
     }
+
     window.addEventListener('mousemove', onMove, { passive: true })
+
     return () => {
       window.removeEventListener('mousemove', onMove)
       cancelAnimationFrame(rafId)
@@ -43,6 +53,7 @@ function CursorGlow() {
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll()
+
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -58,39 +69,69 @@ function ScrollProgress() {
 }
 
 export default function App() {
+  const currentPath =
+    window.location.pathname.replace(/\/+$/, '') || '/'
+
+  /*
+   * Dedicated SEO/service pages
+   */
+  if (SERVICE_PAGES[currentPath]) {
+    return <SEOPage path={currentPath} />
+  }
+
+  /*
+   * Homepage smooth scrolling
+   */
   useEffect(() => {
-    // Smooth scroll with offset for fixed header
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href')
-        if (href === '#') return
-        e.preventDefault()
-        const target = document.querySelector(href)
-        if (target) {
-          const headerOffset = 80
-          const elementPosition = target.getBoundingClientRect().top
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          })
-        }
+    const anchors = document.querySelectorAll('a[href^="#"]')
+
+    const handleClick = (e) => {
+      const href = e.currentTarget.getAttribute('href')
+
+      if (!href || href === '#') return
+
+      const target = document.querySelector(href)
+
+      if (!target) return
+
+      e.preventDefault()
+
+      const headerOffset = 80
+      const elementPosition = target.getBoundingClientRect().top
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
       })
+    }
+
+    anchors.forEach((anchor) => {
+      anchor.addEventListener('click', handleClick)
     })
+
+    return () => {
+      anchors.forEach((anchor) => {
+        anchor.removeEventListener('click', handleClick)
+      })
+    }
   }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-paper via-white to-paper/50 relative">
-      {/* Scroll progress indicator */}
+
       <ScrollProgress />
 
-      {/* Cursor glow follower */}
       <CursorGlow />
 
-      {/* Subtle noise overlay for depth */}
-      <div className="noise-overlay" aria-hidden="true" />
+      <div
+        className="noise-overlay"
+        aria-hidden="true"
+      />
 
       <Nav />
+
       <main>
         <Hero />
         <About />
@@ -100,7 +141,9 @@ export default function App() {
         <FAQ />
         <Contact />
       </main>
+
       <Footer />
+
     </div>
   )
 }
